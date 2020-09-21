@@ -35,8 +35,12 @@ void printa_num(int n, signed char *X){
 
 
 void cp_mem(void *origem, void *destino, size_t n){
+    
+    //printf("COPIA\n");
+    
+    
    // Casting da origem e destino para tipo char
-   char *sorigem = (char *)origem, *sdestino = (char *)destino;
+    char *sorigem = (char *)origem, *sdestino = (char *)destino;
   
    // Copia da origem para destino
     for(int i=0; i<n; i++){
@@ -174,8 +178,8 @@ void karatsuba(int m, signed char *K, signed char *J, int z, signed char *Z){
     signed char * X = calloc(n, sizeof(signed char));
     signed char * Y = calloc(n, sizeof(signed char));
     
-    cp_mem(K, X+(n-m)*sizeof(unsigned char), n);
-    cp_mem(J, Y+(n-m)*sizeof(unsigned char), n);
+    cp_mem(K, X+(n-m)*sizeof(unsigned char), n-(n-m));
+    cp_mem(J, Y+(n-m)*sizeof(unsigned char), n-(n-m));
     
     
     int tamX = n-zeros(X, n);
@@ -272,9 +276,13 @@ int main(int argc, const char * argv[]) {
         scanf("%c", &aux);
         X[i] = atoi(&aux);
     }
+    
+    /*
     printf("\n");
     printa_num(n, X);
     printf("\n");
+    */
+    
     getchar();
     
     for(int i = 0; i < n; i++){
@@ -282,8 +290,11 @@ int main(int argc, const char * argv[]) {
         Y[i] = atoi(&aux);
     }
     
+    /*
     printa_num(n, Y);
     printf("\n");
+     
+    */
     karatsuba(n, X, Y, 2*n, R);
 
     int zR = zeros(R, 2*n);
