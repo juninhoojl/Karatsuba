@@ -1,10 +1,8 @@
-//
-//  main.c
 //  Karatsuba
-//
-//  Created by José Luiz Junior on 08/09/20.
-//  Copyright © 2020 José Luiz Junior. All rights reserved.
-//
+//  main.c
+//  27/08/20
+//  Disciplina: CIC110 - Análise e Projeto de Algoritmos I
+//  Grupo: José Luiz Junior e Isabela Corsi
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,21 +22,11 @@ void shift(int sh, int n, signed char *A){
     for(int i = n - sh; i < n; i++){
         A[i] = 0;
     }
-    
-}
 
-void printa_num(int n, signed char *X){
-    for(int i = 0; i < n; i++)
-        printf("%d", X[i]);
-    printf("\n");
 }
-
 
 void cp_mem(void *origem, void *destino, size_t n){
-    
-    //printf("COPIA\n");
-    
-    
+
    // Casting da origem e destino para tipo char
     char *sorigem = (char *)origem, *sdestino = (char *)destino;
   
@@ -148,16 +136,13 @@ void tradicional_multi(int n, signed char *A, signed char *B, int m, signed char
 
 
 int zeros(signed char *V, int n){
-    
+
     int i = 0;
-    
 
     while(!V[i] && i < n){ // Ou acabou o vetor caso seja inteiro zero
         i++;
     }
-    
-    // Caso seja inteiro zero
-    
+
     return i;
 }
 
@@ -165,14 +150,7 @@ int zeros(signed char *V, int n){
 
 void karatsuba(int m, signed char *K, signed char *J, int z, signed char *Z){
     
-    // Verificacao para a primeira vez
 
-    // Vai conferir o tamanho tanto de X quanto de Y
-    
-    // Possivel solucao copiar para um vetor de tamanho maior os dois numeros
-    
-    //printf("TESTE\n");
-    
     int n = (m%2 != 0) ? (m+1) : m;
     
     signed char * X = calloc(n, sizeof(signed char));
@@ -184,7 +162,7 @@ void karatsuba(int m, signed char *K, signed char *J, int z, signed char *Z){
     
     int tamX = n-zeros(X, n);
     int tamY = n-zeros(Y, n);
-
+    
     if(tamX <= 2 && tamY <=2 ){
         
         // Somente se nao for zero
@@ -250,7 +228,6 @@ void karatsuba(int m, signed char *K, signed char *J, int z, signed char *Z){
     free(V2);
     free(V4);
     free(V1);
-    
 
     return;
  
@@ -277,24 +254,13 @@ int main(int argc, const char * argv[]) {
         X[i] = atoi(&aux);
     }
     
-    /*
-    printf("\n");
-    printa_num(n, X);
-    printf("\n");
-    */
-    
     getchar();
     
     for(int i = 0; i < n; i++){
         scanf("%c", &aux);
         Y[i] = atoi(&aux);
     }
-    
-    /*
-    printa_num(n, Y);
-    printf("\n");
-     
-    */
+
     karatsuba(n, X, Y, 2*n, R);
 
     int zR = zeros(R, 2*n);
