@@ -148,11 +148,11 @@ int zeros(signed char *V, int n){
 
 
 
+
 void karatsuba(int m, signed char *K, signed char *J, int z, signed char *Z){
     
-
     int n = (m%2 != 0) ? (m+1) : m;
-    
+
     signed char * X = calloc(n, sizeof(signed char));
     signed char * Y = calloc(n, sizeof(signed char));
     
@@ -162,6 +162,7 @@ void karatsuba(int m, signed char *K, signed char *J, int z, signed char *Z){
     
     int tamX = n-zeros(X, n);
     int tamY = n-zeros(Y, n);
+
     
     if(tamX <= 2 && tamY <=2 ){
         
@@ -199,7 +200,7 @@ void karatsuba(int m, signed char *K, signed char *J, int z, signed char *Z){
     // Qual tem menos zeros eh o maior
     int zs1 = zeros(S1, n);
     int zs2 = zeros(S2, n);
-
+    
     // Ja confere se a quantidade de zeros eh igual a n entao nao faz nada
     if(zs1 != n && zs2 != n){ // Somente vai multiplicar se nao for tudo zero
         // Multiplica
@@ -251,14 +252,16 @@ int main(int argc, const char * argv[]) {
     
     for(int i = 0; i < n; i++){
         scanf("%c", &aux);
-        X[i] = atoi(&aux);
+        //X[i] = atoi(&aux);
+        X[i] = (int) aux - '0';
     }
     
     getchar();
     
     for(int i = 0; i < n; i++){
         scanf("%c", &aux);
-        Y[i] = atoi(&aux);
+        Y[i] = (int) aux - '0';
+        //Y[i] = atoi(&aux);
     }
 
     karatsuba(n, X, Y, 2*n, R);
